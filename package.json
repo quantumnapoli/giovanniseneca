@@ -1,0 +1,14 @@
+{
+  "name": "giovanniseneca",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sito di Giovanni Seneca, chitarrista e compositore. Statico, bilingue (IT/EN), generato con uno script Node senza dipendenze.",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && node scripts/serve.mjs",
+    "serve": "node scripts/serve.mjs",
+    "images": "python3 -I scripts/build-images.py"
+  }
+}

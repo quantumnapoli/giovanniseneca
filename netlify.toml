@@ -1,0 +1,82 @@
+[build]
+  command = "node build.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# ---------------------------------------------------------------------------
+# Redirect dai vecchi indirizzi WordPress, così nessun link esistente si rompe
+# ---------------------------------------------------------------------------
+[[redirects]]
+  from = "/biography"
+  to = "/biografia/"
+  status = 301
+
+[[redirects]]
+  from = "/i-progetti"
+  to = "/progetti/"
+  status = 301
+
+[[redirects]]
+  from = "/discografia-giovanni-seneca"
+  to = "/album/"
+  status = 301
+
+[[redirects]]
+  from = "/albums/margini-abitabili-2024"
+  to = "/album/margini-abitabili/"
+  status = 301
+
+[[redirects]]
+  from = "/albums"
+  to = "/album/"
+  status = 301
+
+[[redirects]]
+  from = "/albums/:slug"
+  to = "/album/:slug/"
+  status = 301
+
+[[redirects]]
+  from = "/feed"
+  to = "/"
+  status = 301
+
+# ---------------------------------------------------------------------------
+# Header
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# CSS e JS hanno l'hash nel nome: cache lunga e immutabile
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Immagini e video: nomi stabili, cache di una settimana
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/assets/icons.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
