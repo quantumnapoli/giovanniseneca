@@ -28,7 +28,7 @@ fs.mkdirSync(DIST, { recursive: true });
 // 1) Asset statici (immagini, font, favicon). CSS e JS vengono trattati a parte (nome con hash).
 fs.cpSync(path.join(SRC, 'static'), path.join(DIST, 'assets'), {
   recursive: true,
-  filter: (p) => !/[\\/]static[\\/](css|js)([\\/]|$)/.test(p),
+  filter: (p) => !/[\\/]static[\\/](css[\\/]main\.css|js[\\/]main\.js)$/.test(p),
 });
 
 // 2) CSS e JS con hash nel nome, così la cache resta valida finché non cambiano.

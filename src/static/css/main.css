@@ -35,6 +35,8 @@
   --mute: #8591a0;
   --line: rgba(236, 231, 219, 0.15);
   --line-strong: rgba(236, 231, 219, 0.32);
+  --soft: rgba(236, 231, 219, 0.88);
+  --tint: rgba(236, 231, 219, 0.1);
   --lemon: #e6d36f;
   --lemon-hover: #f1e28f;
   --lemon-ink: #171303;
@@ -116,8 +118,8 @@ p { text-wrap: pretty; }
 .btn:active { transform: translateY(1px) scale(0.985); }
 .btn-primary { background: var(--lemon); color: var(--lemon-ink); }
 .btn-primary:hover { background: var(--lemon-hover); }
-.btn-ghost { border-color: var(--line-strong); color: var(--linen); background: rgba(10, 18, 32, 0.35); }
-.btn-ghost:hover { border-color: var(--linen); background: rgba(236, 231, 219, 0.1); }
+.btn-ghost { border-color: var(--line-strong); color: var(--linen); background: transparent; }
+.btn-ghost:hover { border-color: var(--linen); background: var(--tint); }
 .btn-sm { padding: 0.6rem 1.1rem; font-size: 0.875rem; }
 
 .link {
@@ -125,7 +127,7 @@ p { text-wrap: pretty; }
   text-decoration-color: var(--line-strong);
   transition: text-decoration-color 0.2s, color 0.2s;
 }
-.link:hover { text-decoration-color: var(--lemon); color: #fff; }
+.link:hover { text-decoration-color: var(--lemon); }
 .link-more { font-weight: 500; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
@@ -178,7 +180,7 @@ p { text-wrap: pretty; }
   font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-decoration: none;
   transition: background-color 0.25s, border-color 0.25s;
 }
-.lang:hover { border-color: var(--linen); background: rgba(236, 231, 219, 0.1); }
+.lang:hover { border-color: var(--linen); background: var(--tint); }
 .menu-btn {
   display: none; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0;
   border: 1px solid var(--line-strong); border-radius: 999px; background: none; color: var(--linen); cursor: pointer;
@@ -231,7 +233,7 @@ p { text-wrap: pretty; }
   margin-top: 1.5rem; font-family: var(--display); font-style: italic;
   font-size: clamp(1.5rem, 3vw, 2.35rem); line-height: 1.15;
 }
-.hero-lead { margin-top: 1.25rem; max-width: 34ch; font-size: 1.1875rem; line-height: 1.55; color: rgba(236, 231, 219, 0.86); }
+.hero-lead { margin-top: 1.25rem; max-width: 34ch; font-size: 1.1875rem; line-height: 1.55; color: var(--soft); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 
 @media (max-width: 899px) {
@@ -246,20 +248,6 @@ p { text-wrap: pretty; }
   .hero-lead { font-size: 1.0625rem; }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero-img { animation: media-in 1.8s var(--ease) both; }
-  .hero-title .line { animation: line-in 1.1s var(--ease) both; }
-  .hero-title .line + .line { animation-delay: 0.12s; }
-  .hero-role, .hero-lead, .hero-cta { animation: fade-in 1s var(--ease) 0.45s both; }
-  .hero-lead { animation-delay: 0.55s; }
-  .hero-cta { animation-delay: 0.65s; }
-}
-@keyframes media-in { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
-@keyframes line-in {
-  from { clip-path: inset(0 0 100% 0); transform: translateY(0.35em); }
-  to { clip-path: inset(0 0 -0.2em 0); transform: none; }
-}
-@keyframes fade-in { from { opacity: 0; transform: translateY(0.6rem); } to { opacity: 1; transform: none; } }
 
 /* ---------- Sezioni generali ---------- */
 .block { padding-block: clamp(4rem, 8vw, 7rem); }
@@ -274,7 +262,7 @@ p { text-wrap: pretty; }
 .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 
 .prose { max-width: 62ch; }
-.prose p { margin-top: 1.15em; line-height: 1.75; color: rgba(236, 231, 219, 0.9); }
+.prose p { margin-top: 1.15em; line-height: 1.75; color: var(--soft); }
 .prose p:first-child, .prose h4 + p { margin-top: 0; }
 .prose h4 { margin: 2.5rem 0 0.9rem; font-family: var(--display); font-size: 1.75rem; font-weight: 400; line-height: 1.1; }
 .prose h4:first-child { margin-top: 0; }
@@ -282,7 +270,6 @@ p { text-wrap: pretty; }
 
 /* ---------- Sezioni della onepage ---------- */
 .sec { padding-block: clamp(4.5rem, 9vw, 8rem); }
-.sec-alt { background: var(--deeper); border-block: 1px solid var(--line); }
 .sec-head { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
 .sec-title { font-size: clamp(3.25rem, 9vw, 8rem); font-weight: 400; line-height: 0.95; letter-spacing: -0.02em; }
 .sec-sub { margin-top: 0.9rem; font-family: var(--display); font-style: italic; font-size: clamp(1.4rem, 2.6vw, 2rem); color: var(--fog); }
@@ -316,11 +303,6 @@ p { text-wrap: pretty; }
   font-family: var(--display); font-style: italic; font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: 1.2;
 }
 .marquee-track li:nth-child(even) { color: var(--fog); }
-@media (prefers-reduced-motion: no-preference) {
-  .marquee { animation: marquee 90s linear infinite; }
-  .marquee:hover { animation-play-state: paused; }
-}
-@keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
   .marquee { display: block; width: auto; padding-inline: var(--gutter); max-width: var(--max); margin-inline: auto; }
   .marquee-track { flex-wrap: wrap; }
@@ -428,7 +410,7 @@ p { text-wrap: pretty; }
 .album-title { margin-top: 1.25rem; font-size: clamp(2.75rem, 6.5vw, 5.5rem); font-weight: 400; line-height: 0.98; }
 .album-year { margin-top: 1.1rem; font-weight: 600; color: var(--lemon); }
 .album-kind { margin-top: 0.2rem; font-family: var(--display); font-style: italic; font-size: 1.5rem; color: var(--fog); }
-.album-desc { margin-top: 1.5rem; max-width: 52ch; font-size: 1.125rem; line-height: 1.7; color: rgba(236, 231, 219, 0.9); }
+.album-desc { margin-top: 1.5rem; max-width: 52ch; font-size: 1.125rem; line-height: 1.7; color: var(--soft); }
 .album-award { margin-top: 1rem; font-weight: 500; }
 .listen-block { margin-top: 2rem; }
 .listen-block .chips { margin-top: 0.75rem; }
@@ -548,3 +530,55 @@ p { text-wrap: pretty; }
 @media (max-width: 479px) {
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* =========================================================================
+   Temi colore per sezione: ogni tema ridefinisce gli stessi token,
+   quindi bottoni, link, chip e linee si adattano da soli.
+   ========================================================================= */
+.theme-cobalt, .theme-light, .theme-lemon { background: var(--night); color: var(--linen); }
+.theme-cobalt {
+  --night: #142b63; --deeper: #10245a;
+  --linen: #f3f0e8; --soft: rgba(243, 240, 232, 0.9); --fog: #bcc7df; --mute: #a6b4d7;
+  --line: rgba(243, 240, 232, 0.18); --line-strong: rgba(243, 240, 232, 0.4); --tint: rgba(243, 240, 232, 0.12);
+}
+.theme-light {
+  color-scheme: light;
+  --night: #e8ecef; --deeper: #dce2e7;
+  --linen: #0f1a2c; --soft: rgba(15, 26, 44, 0.86); --fog: #475569; --mute: #566174;
+  --line: rgba(15, 26, 44, 0.14); --line-strong: rgba(15, 26, 44, 0.32); --tint: rgba(15, 26, 44, 0.06);
+  --lemon: #1f3fae; --lemon-hover: #2b50d1; --lemon-ink: #f5f7fa;
+}
+.theme-lemon {
+  color-scheme: light;
+  --night: #e6d36f; --deeper: #dcc85c;
+  --linen: #171303; --soft: rgba(23, 19, 3, 0.88); --fog: #4a4214; --mute: #5a5122;
+  --line: rgba(23, 19, 3, 0.18); --line-strong: rgba(23, 19, 3, 0.4); --tint: rgba(23, 19, 3, 0.07);
+  --lemon: #142b63; --lemon-hover: #1d3a80; --lemon-ink: #f3f0e8;
+}
+.mosaic-item img { box-shadow: 0 0 0 1px var(--line); }
+.theme-light .mosaic-item img { box-shadow: 0 18px 40px -24px rgba(15, 26, 44, 0.45), 0 0 0 1px var(--line); }
+
+/* Sezioni a "sipario": GSAP anima il clip-path, qui solo lo stato finale */
+[data-curtain] { will-change: clip-path; }
+
+/* Banda città: nastro giallo inclinato che attraversa la pagina */
+.cities { padding-block: clamp(4rem, 8vw, 7rem); }
+.marquee-band {
+  margin-inline: -4vw; padding-block: clamp(0.9rem, 2vw, 1.5rem);
+  background: #e6d36f; color: #171303; transform: rotate(-2.5deg);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+}
+.marquee-band .marquee-track li:nth-child(even) { color: #142b63; }
+.marquee { will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .marquee-band { transform: none; margin-inline: 0; } }
+
+/* Cornici con parallasse interno */
+.bio-photo, .statement-photo, .booking-photo { overflow: hidden; }
+
+/* Testi divisi da SplitText */
+.hero-title .line { overflow: hidden; padding-block: 0.06em; margin-block: -0.06em; }
+.ch { display: inline-block; will-change: transform; }
+
+/* Finché GSAP non è pronto, niente lampi del contenuto che sta per animarsi */
+.motion-ok .is-home .hero-img, .motion-ok .is-home .hero-inner, .motion-ok .is-home .site-header .header-row,
+.motion-ok .album-hero { visibility: hidden; }

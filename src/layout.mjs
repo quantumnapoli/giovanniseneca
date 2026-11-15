@@ -62,7 +62,7 @@ export function layout(o, assets) {
 <link rel="preload" href="/assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 ${head}
 <link rel="stylesheet" href="${assets.css}">
-<script>document.documentElement.classList.add('js')</script>
+<script>(function(h){h.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){h.classList.add('motion-ok');setTimeout(function(){if(!window.gsap)h.classList.remove('motion-ok')},3000)}})(document.documentElement)</script>
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 </head>
 <body class="${esc(bodyClass)}">
@@ -112,6 +112,9 @@ ${body}
     <p>${esc(ui.siteBy)} <a class="link" href="${LINKS.credit}" target="_blank" rel="noopener noreferrer">Massimo Morgante</a></p>
   </div>
 </footer>
+<script src="/assets/js/vendor/gsap-3.13.0.min.js" defer></script>
+<script src="/assets/js/vendor/ScrollTrigger-3.13.0.min.js" defer></script>
+<script src="/assets/js/vendor/SplitText-3.13.0.min.js" defer></script>
 <script src="${assets.js}" defer></script>
 </body>
 </html>

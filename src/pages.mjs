@@ -91,9 +91,11 @@ function citiesSection(lang) {
   const cities = CITIES[lang].map((c) => `<li>${esc(c)}</li>`).join('');
   return `<section class="cities" aria-labelledby="cities-title">
   <div class="wrap"><h2 class="cities-label" id="cities-title">${esc(h.citiesTitle)}</h2></div>
-  <div class="marquee">
-    <ul class="marquee-track">${cities}</ul>
-    <ul class="marquee-track" aria-hidden="true">${cities}</ul>
+  <div class="marquee-band">
+    <div class="marquee">
+      <ul class="marquee-track">${cities}</ul>
+      <ul class="marquee-track" aria-hidden="true">${cities}</ul>
+    </div>
   </div>
 </section>`;
 }
@@ -133,7 +135,7 @@ function projectsSection(lang) {
     (p) => `<li><a class="chip" href="#${p.id}">${esc(tr(p.title, lang))}</a></li>`
   ).join('')}</ul></nav>`;
 
-  return `<section class="sec sec-projects" id="${id}" data-section aria-labelledby="${id}-title">
+  return `<section class="sec sec-projects theme-cobalt" id="${id}" data-section data-curtain aria-labelledby="${id}-title">
   <div class="wrap">
     ${secHead(id, ps.h1, '', ps.lead)}
     ${jump}
@@ -156,7 +158,7 @@ function albumsSection(lang) {
       </span>
     </a>
   </li>`;
-  return `<section class="sec sec-alt" id="${id}" data-section aria-labelledby="${id}-title">
+  return `<section class="sec theme-light" id="${id}" data-section data-curtain aria-labelledby="${id}-title">
   <div class="wrap">
     ${secHead(id, a.h1, '', a.lead)}
     <div class="listen-row"><span class="listen-label">${esc(a.listenAll)}</span>${streamChips(lang)}</div>
@@ -213,7 +215,7 @@ function bookingSection(lang) {
       <span class="formation-more">${esc(b.seeProject)}${icon('arrow-up-right')}</span>
     </a></li>`
   ).join('');
-  return `<section class="sec sec-alt sec-booking" id="${id}" data-section aria-labelledby="${id}-title">
+  return `<section class="sec sec-booking theme-lemon" id="${id}" data-section data-curtain aria-labelledby="${id}-title">
   <div class="wrap">
     ${secHead(id, b.h1, '', b.lead)}
     <div class="booking-grid">

@@ -152,4 +152,142 @@
       if (Math.abs(dx) > 60) show(i + (dx < 0 ? 1 : -1));
     });
   }
+
+  /* =======================================================================
+     GSAP: ogni animazione racconta qualcosa (ingresso, lettura, cambio sezione).
+     Con "riduci movimento" attivo non parte nulla.
+     ======================================================================= */
+  const g = window.gsap;
+  const ST = window.ScrollTrigger;
+  const Split = window.SplitText;
+  if (!g || !ST) {
+    root.classList.remove('motion-ok');
+    return;
+  }
+  g.registerPlugin(ST, ...(Split ? [Split] : []));
+  const $$ = (s, r = d) => [...r.querySelectorAll(s)];
+  const split = (el, opts) => (Split ? Split.create(el, opts) : null);
+  const fontsReady = Promise.race([d.fonts ? d.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 1500))]);
+
+  fontsReady.then(() => {
+    const mm = g.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      /* Hero: la foto emerge dal buio, il nome sale lettera per lettera */
+      const hero = d.querySelector('.hero');
+      if (hero) {
+        const img = hero.querySelector('.hero-img');
+        const inner = hero.querySelector('.hero-inner');
+        const row = d.querySelector('.site-header .header-row');
+        g.set([img, inner, row], { visibility: 'visible' });
+        const chars = $$('.hero-title .line', hero).flatMap((l) => (split(l, { type: 'chars', charsClass: 'ch' }) || { chars: [] }).chars);
+        g.timeline({ defaults: { ease: 'expo.out' } })
+          .from(img, { scale: 1.18, opacity: 0, duration: 2.4 })
+          .from(chars, { yPercent: 115, rotate: 5, duration: 1.5, stagger: 0.035 }, 0.15)
+          .from($$('.hero-role, .hero-lead, .hero-cta > *', hero), { y: 28, opacity: 0, duration: 1.2, stagger: 0.09 }, 0.75)
+          .from(row, { y: -24, opacity: 0, duration: 1 }, 0.9);
+        // allo scroll la foto scende piano e il testo si allontana
+        g.to(img, { yPercent: 14, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+        g.to(inner, { yPercent: -22, opacity: 0.1, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+      }
+
+      /* Scheda album: copertina e titolo entrano insieme */
+      const ah = d.querySelector('.album-hero');
+      if (ah) {
+        g.set(ah, { visibility: 'visible' });
+        const t = ah.querySelector('.album-title');
+        const s = t && split(t, { type: 'lines,chars', mask: 'lines', charsClass: 'ch' });
+        g.timeline({ defaults: { ease: 'expo.out' } })
+          .from(ah.querySelector('.album-cover img'), { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.12, duration: 1.6 })
+          .from(s ? s.chars : t, { yPercent: 110, duration: 1.3, stagger: 0.03 }, 0.2)
+          .from($$('.album-info > :not(.album-title)', ah), { y: 22, opacity: 0, duration: 1, stagger: 0.07 }, 0.45);
+      }
+
+      /* Titoli delle sezioni: le lettere salgono quando la sezione arriva */
+      $$('.sec-title').forEach((t) => {
+        const s = split(t, { type: 'lines,chars', mask: 'lines', charsClass: 'ch' });
+        if (!s) return;
+        g.from(s.chars, { yPercent: 110, duration: 1.2, ease: 'expo.out', stagger: 0.03, scrollTrigger: { trigger: t, start: 'top 88%', once: true } });
+      });
+
+      /* La frase su Morricone si accende parola per parola mentre la leggi */
+      $$('.statement-text').forEach((t) => {
+        const s = split(t, { type: 'words' });
+        if (!s) return;
+        g.fromTo(s.words, { opacity: 0.14 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: t, start: 'top 80%', end: 'bottom 42%', scrub: true } });
+      });
+
+      /* Sezioni colorate: si aprono come un sipario */
+      $$('[data-curtain]').forEach((sec) => {
+        g.fromTo(sec, { clipPath: 'inset(56px 3.5% 0px 3.5% round 48px)' }, { clipPath: 'inset(0px 0% 0px 0% round 0px)', ease: 'none', scrollTrigger: { trigger: sec, start: 'top bottom', end: 'top 20%', scrub: true } });
+      });
+
+      /* Foto in cornice: parallasse interno */
+      $$('.bio-photo img, .statement-photo img, .booking-photo img').forEach((img) => {
+        g.fromTo(img, { yPercent: -7, scale: 1.16 }, { yPercent: 7, scale: 1.16, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+      });
+
+      /* Video dei progetti: la cornice si apre mentre scorri */
+      $$('.project-media .video-play, .album-video .video-play').forEach((v) => {
+        g.fromTo(v, { clipPath: 'inset(16% 9% 16% 9% round 24px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: v, start: 'top 96%', end: 'top 45%', scrub: true } });
+      });
+
+      /* Nastro delle città: scorre sempre, accelera quando scorri la pagina */
+      const mq = d.querySelector('.marquee');
+      if (mq) {
+        const loop = g.to(mq, { xPercent: -50, ease: 'none', duration: 48, repeat: -1 });
+        ST.create({
+          trigger: '.cities',
+          start: 'top bottom',
+          end: 'bottom top',
+          onToggle: (self) => (self.isActive ? loop.play() : loop.pause()),
+          onUpdate: (self) => {
+            const v = Math.min(Math.abs(self.getVelocity()) / 160, 7);
+            if (v < 0.3) return;
+            loop.timeScale(1 + v);
+            g.to(loop, { timeScale: 1, duration: 1.4, ease: 'power3.out', overwrite: true });
+          },
+        });
+        g.fromTo('.marquee-band', { rotate: -5 }, { rotate: -1, ease: 'none', scrollTrigger: { trigger: '.cities', start: 'top bottom', end: 'bottom top', scrub: true } });
+      }
+
+      /* Elenchi che entrano a gruppi: album, foto, formazioni */
+      const groupIn = (sel, from) => {
+        const els = $$(sel);
+        if (!els.length) return;
+        g.set(els, from);
+        ST.batch(els, {
+          start: 'top 90%',
+          once: true,
+          onEnter: (b) => g.to(b, { y: 0, x: 0, rotate: 0, scale: 1, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: 0.08, overwrite: true }),
+        });
+      };
+      groupIn('.mosaic-item', { y: 70, opacity: 0, rotate: (i) => (i % 2 ? 2.5 : -2.5) });
+      groupIn('.g-item', { y: 50, opacity: 0, scale: 0.96 });
+      groupIn('.formation-list li', { x: -40, opacity: 0 });
+      groupIn('.spec dl > div', { y: 24, opacity: 0 });
+
+      /* Pulsanti play "magnetici" (solo con il mouse) */
+      if (matchMedia('(pointer: fine)').matches) {
+        $$('.video-play').forEach((a) => {
+          const b = a.querySelector('.video-btn');
+          if (!b) return;
+          const xTo = g.quickTo(b, 'x', { duration: 0.6, ease: 'power3' });
+          const yTo = g.quickTo(b, 'y', { duration: 0.6, ease: 'power3' });
+          a.addEventListener('pointermove', (e) => {
+            const r = a.getBoundingClientRect();
+            xTo((e.clientX - r.left - r.width / 2) * 0.22);
+            yTo((e.clientY - r.top - r.height / 2) * 0.22);
+          });
+          a.addEventListener('pointerenter', () => g.to(b, { scale: 1.12, duration: 0.4 }));
+          a.addEventListener('pointerleave', () => {
+            xTo(0);
+            yTo(0);
+            g.to(b, { scale: 1, duration: 0.4 });
+          });
+        });
+      }
+    });
+    root.classList.remove('motion-ok');
+    ST.refresh();
+  });
 })();
