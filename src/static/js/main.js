@@ -153,13 +153,26 @@
     });
   }
 
-  /* Video "Dal vivo": parte solo quando si vede, si ferma quando esce (e mai con "riduci movimento") */
-  const reelVideo = d.querySelector('.reel video');
-  if (reelVideo && !reduce && 'IntersectionObserver' in window) {
-    new IntersectionObserver(
-      ([e]) => (e.isIntersecting ? reelVideo.play().catch(() => {}) : reelVideo.pause()),
-      { rootMargin: '150px', threshold: 0.05 }
-    ).observe(d.querySelector('.reel'));
+  /* Video di sfondo della hero: parte a pagina caricata, si ferma quando esce dallo schermo.
+     Non parte con "riduci movimento" o risparmio dati: resta la foto. */
+  const heroVideo = d.querySelector('.hero-video');
+  const saveData = navigator.connection && navigator.connection.saveData;
+  if (heroVideo && !reduce && !saveData) {
+    const hero = d.querySelector('.hero');
+    let visible = true;
+    const run = () => {
+      if (!visible) return;
+      heroVideo.play().then(() => heroVideo.classList.add('is-on')).catch(() => {});
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting;
+        if (visible && heroVideo.readyState > 0) run();
+        else heroVideo.pause();
+      }).observe(hero);
+    }
+    if (d.readyState === 'complete') run();
+    else addEventListener('load', run, { once: true });
   }
 
   /* =======================================================================
@@ -184,7 +197,7 @@
       /* Hero: la foto emerge dal buio, il nome sale lettera per lettera */
       const hero = d.querySelector('.hero');
       if (hero) {
-        const img = hero.querySelector('.hero-img');
+        const img = hero.querySelector('.hero-visual');
         const inner = hero.querySelector('.hero-inner');
         const row = d.querySelector('.site-header .header-row');
         g.set([img, inner, row], { visibility: 'visible' });
@@ -209,21 +222,6 @@
           .from(ah.querySelector('.album-cover img'), { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.12, duration: 1.6 })
           .from(s ? s.chars : t, { yPercent: 110, duration: 1.3, stagger: 0.03 }, 0.2)
           .from($$('.album-info > :not(.album-title)', ah), { y: 22, opacity: 0, duration: 1, stagger: 0.07 }, 0.45);
-      }
-
-      /* "Dal vivo": la pagina si ferma, la finestra del video si allarga fino a riempire lo schermo */
-      const reel = d.querySelector('.reel');
-      if (reel) {
-        const frame = reel.querySelector('.reel-frame');
-        const vid = reel.querySelector('video');
-        const title = reel.querySelector('.reel-title');
-        const ts = title && split(title, { type: 'chars', charsClass: 'ch' });
-        const narrow = innerWidth < 700;
-        g.set(reel, { height: '100svh' });
-        g.timeline({ scrollTrigger: { trigger: reel, start: 'top top', end: '+=140%', pin: true, scrub: 0.6, anticipatePin: 1 } })
-          .fromTo(frame, { clipPath: narrow ? 'inset(24% 12% 24% 12% round 28px)' : 'inset(18% 27% 18% 27% round 36px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'power2.inOut', duration: 1 }, 0)
-          .fromTo(vid, { scale: narrow ? 1.18 : 1.4 }, { scale: 1.1, ease: 'none', duration: 1 }, 0)
-          .from(ts ? ts.chars : title, { yPercent: 115, duration: 0.5, stagger: 0.04, ease: 'power3.out' }, 0.6);
       }
 
       /* Titoli delle sezioni: le lettere salgono quando la sezione arriva */

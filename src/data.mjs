@@ -121,7 +121,6 @@ export const HOME = {
     lead: 'Chitarre classica, flamenca e battente per fondere la musica colta con il linguaggio popolare del Mediterraneo.',
     ctaAlbums: 'Ascolta gli album',
     ctaBooking: 'Booking',
-    reelTitle: 'Dal vivo',
     quote: 'Ennio Morricone ha composto per lui un concerto per chitarra e orchestra.',
     quoteNote:
       'Eseguito in prima assoluta a Parigi e inciso con l’Orchestra Nazionale dell’Accademia di Santa Cecilia di Roma.',
@@ -138,7 +137,6 @@ export const HOME = {
     lead: 'Classical, flamenco and battente guitars, blending art music with the popular language of the Mediterranean.',
     ctaAlbums: 'Listen to the albums',
     ctaBooking: 'Booking',
-    reelTitle: 'Live',
     quote: 'Ennio Morricone wrote a concerto for guitar and orchestra for him.',
     quoteNote:
       'Premiered in Paris and recorded with the Orchestra Nazionale dell’Accademia di Santa Cecilia in Rome.',

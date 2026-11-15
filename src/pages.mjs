@@ -38,7 +38,12 @@ function heroSection(lang) {
     srcset,
     html: `<section class="hero" aria-labelledby="hero-title">
   <div class="hero-media">
-    <img class="hero-img" src="/assets/img/photos/chitarrista-m.webp" srcset="${srcset}" sizes="(min-width: 900px) 72vw, 100vw" width="${hero.w}" height="${hero.h}" alt="${esc(heroAlt)}" fetchpriority="high" decoding="async">
+    <div class="hero-visual">
+      <img class="hero-img" src="/assets/img/photos/chitarrista-m.webp" srcset="${srcset}" sizes="(min-width: 900px) 72vw, 100vw" width="${hero.w}" height="${hero.h}" alt="${esc(heroAlt)}" fetchpriority="high" decoding="async">
+      <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+        <source src="/assets/img/video/concerto.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
   <div class="wrap hero-inner">
     <h1 class="hero-title" id="hero-title"><span class="line">Giovanni</span> <span class="line">Seneca</span></h1>
@@ -82,19 +87,6 @@ function bioSection(lang) {
         </aside>
       </div>
     </div>
-  </div>
-</section>`;
-}
-
-function reelSection(lang) {
-  const h = HOME[lang];
-  const v = photos.video;
-  return `<section class="reel" aria-label="${esc(h.reelTitle)}">
-  <div class="reel-frame">
-    <video muted loop playsinline preload="none" poster="/assets/img/video/concerto-poster.webp" width="${v.w}" height="${v.h}" aria-label="${esc(GALLERY_PAGE[lang].videoAlt)}">
-      <source src="/assets/img/video/concerto.mp4" type="video/mp4">
-    </video>
-    <p class="reel-title">${esc(h.reelTitle)}</p>
   </div>
 </section>`;
 }
@@ -263,7 +255,7 @@ function bookingSection(lang) {
 function home(lang) {
   const h = HOME[lang];
   const hero = heroSection(lang);
-  const body = [hero.html, bioSection(lang), reelSection(lang), citiesSection(lang), projectsSection(lang), albumsSection(lang), gallerySection(lang), bookingSection(lang)].join('\n\n');
+  const body = [hero.html, bioSection(lang), citiesSection(lang), projectsSection(lang), albumsSection(lang), gallerySection(lang), bookingSection(lang)].join('\n\n');
   return {
     path: HOME_PATH[lang],
     altPath: HOME_PATH[other(lang)],
