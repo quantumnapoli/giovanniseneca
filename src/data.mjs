@@ -28,16 +28,17 @@ export const LINKS = {
 };
 
 // ---------------------------------------------------------------------------
-// Pagine e URL (it, en)
+// Struttura: una onepage (/ e /en/) con le sezioni sotto, più una scheda per ogni album.
 // ---------------------------------------------------------------------------
-export const ROUTES = {
-  home: { it: '/', en: '/en/' },
-  bio: { it: '/biografia/', en: '/en/biography/' },
-  projects: { it: '/progetti/', en: '/en/projects/' },
-  albums: { it: '/album/', en: '/en/albums/' },
-  gallery: { it: '/gallery/', en: '/en/gallery/' },
-  booking: { it: '/booking/', en: '/en/booking/' },
+export const HOME_PATH = { it: '/', en: '/en/' };
+export const SECTION = {
+  bio: { it: 'biografia', en: 'biography' },
+  projects: { it: 'progetti', en: 'projects' },
+  albums: { it: 'album', en: 'albums' },
+  gallery: { it: 'gallery', en: 'gallery' },
+  booking: { it: 'booking', en: 'booking' },
 };
+export const sectionHref = (key, lang) => `${HOME_PATH[lang]}#${SECTION[key][lang]}`;
 export const albumUrl = (slug, lang) => (lang === 'en' ? `/en/albums/${slug}/` : `/album/${slug}/`);
 
 // ---------------------------------------------------------------------------
@@ -123,21 +124,10 @@ export const HOME = {
     quote: 'Ennio Morricone ha composto per lui un concerto per chitarra e orchestra.',
     quoteNote:
       'Eseguito in prima assoluta a Parigi e inciso con l’Orchestra Nazionale dell’Accademia di Santa Cecilia di Roma.',
-    facts: [
-      'Docente di chitarra al Conservatorio Gioacchino Rossini di Pesaro',
-      'Direttore artistico di Adriatico Mediterraneo dal 2007',
-      'Solista con la RAI, i Concerts Lamoureux e l’Orchestre Symphonique Français',
-    ],
-    bioLink: 'Leggi la biografia',
     projectsTitle: 'Progetti',
-    projectsLink: 'Tutti i progetti',
     albumsTitle: 'Dischi',
     albumsLead: 'Sei album di musica originale, disponibili su tutte le piattaforme.',
-    albumsLink: 'Tutta la discografia',
     citiesTitle: 'Ha suonato a',
-    bookingTitle: 'Concerti e collaborazioni',
-    bookingText: 'Per date, programmi e preventivi scrivi o chiama.',
-    bookingLink: 'Formazioni e dettagli',
   },
   en: {
     title: 'Giovanni Seneca | Guitarist and composer',
@@ -150,21 +140,10 @@ export const HOME = {
     quote: 'Ennio Morricone wrote a concerto for guitar and orchestra for him.',
     quoteNote:
       'Premiered in Paris and recorded with the Orchestra Nazionale dell’Accademia di Santa Cecilia in Rome.',
-    facts: [
-      'Guitar professor at the Gioacchino Rossini Conservatory in Pesaro',
-      'Artistic director of Adriatico Mediterraneo since 2007',
-      'Soloist with the RAI Orchestra, the Concerts Lamoureux and the Orchestre Symphonique Français',
-    ],
-    bioLink: 'Read the biography',
     projectsTitle: 'Projects',
-    projectsLink: 'All projects',
     albumsTitle: 'Albums',
     albumsLead: 'Six albums of original music, available on every platform.',
-    albumsLink: 'Full discography',
     citiesTitle: 'Has performed in',
-    bookingTitle: 'Concerts and collaborations',
-    bookingText: 'For dates, programmes and quotes, write or call.',
-    bookingLink: 'Formations and details',
   },
 };
 

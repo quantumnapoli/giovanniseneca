@@ -1,4 +1,4 @@
-import { SITE, LINKS, ROUTES, UI } from './data.mjs';
+import { SITE, LINKS, HOME_PATH, UI, sectionHref } from './data.mjs';
 import { esc, icon, socialLinks } from './lib.mjs';
 
 const NAV = ['bio', 'projects', 'albums', 'gallery']; // + booking (pulsante)
@@ -21,7 +21,7 @@ export function layout(o, assets) {
 
   const navItems = NAV.map(
     (k) =>
-      `<li><a href="${ROUTES[k][lang]}"${nav === k ? ' aria-current="page"' : ''}>${esc(ui.nav[k])}</a></li>`
+      `<li><a href="${sectionHref(k, lang)}"${nav === k ? ' aria-current="true"' : ''}>${esc(ui.nav[k])}</a></li>`
   ).join('');
 
   const social = socialLinks()
@@ -32,7 +32,7 @@ export function layout(o, assets) {
     .join('');
 
   const footerNav = [...NAV, 'booking']
-    .map((k) => `<li><a href="${ROUTES[k][lang]}">${esc(ui.nav[k])}</a></li>`)
+    .map((k) => `<li><a href="${sectionHref(k, lang)}">${esc(ui.nav[k])}</a></li>`)
     .join('');
 
   return `<!doctype html>
@@ -69,11 +69,11 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
 <a class="skip" href="#main">${esc(ui.skip)}</a>
 <header class="site-header" data-header>
   <div class="wrap header-row">
-    <a class="brand" href="${ROUTES.home[lang]}" aria-label="${SITE.name}, home">Giovanni Seneca</a>
+    <a class="brand" href="${HOME_PATH[lang]}" aria-label="${SITE.name}, home">Giovanni Seneca</a>
     <nav class="nav" id="nav" aria-label="${lang === 'it' ? 'Principale' : 'Main'}">
       <ul>
         ${navItems}
-        <li><a class="btn btn-primary btn-sm" href="${ROUTES.booking[lang]}"${nav === 'booking' ? ' aria-current="page"' : ''}>${esc(ui.nav.booking)}</a></li>
+        <li><a class="btn btn-primary btn-sm" href="${sectionHref('booking', lang)}">${esc(ui.nav.booking)}</a></li>
       </ul>
       <ul class="nav-social">${social}</ul>
     </nav>

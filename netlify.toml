@@ -6,21 +6,21 @@
   NODE_VERSION = "22"
 
 # ---------------------------------------------------------------------------
-# Redirect dai vecchi indirizzi WordPress, così nessun link esistente si rompe
+# Redirect dai vecchi indirizzi WordPress verso le sezioni della onepage
 # ---------------------------------------------------------------------------
 [[redirects]]
   from = "/biography"
-  to = "/biografia/"
+  to = "/#biografia"
   status = 301
 
 [[redirects]]
   from = "/i-progetti"
-  to = "/progetti/"
+  to = "/#progetti"
   status = 301
 
 [[redirects]]
   from = "/discografia-giovanni-seneca"
-  to = "/album/"
+  to = "/#album"
   status = 301
 
 [[redirects]]
@@ -30,7 +30,7 @@
 
 [[redirects]]
   from = "/albums"
-  to = "/album/"
+  to = "/#album"
   status = 301
 
 [[redirects]]
@@ -39,8 +39,43 @@
   status = 301
 
 [[redirects]]
+  from = "/gallery"
+  to = "/#gallery"
+  status = 301
+
+[[redirects]]
+  from = "/booking"
+  to = "/#booking"
+  status = 301
+
+[[redirects]]
   from = "/feed"
   to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/en/biography"
+  to = "/en/#biography"
+  status = 301
+
+[[redirects]]
+  from = "/en/projects"
+  to = "/en/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/en/albums"
+  to = "/en/#albums"
+  status = 301
+
+[[redirects]]
+  from = "/en/gallery"
+  to = "/en/#gallery"
+  status = 301
+
+[[redirects]]
+  from = "/en/booking"
+  to = "/en/#booking"
   status = 301
 
 # ---------------------------------------------------------------------------

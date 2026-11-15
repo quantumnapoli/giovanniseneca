@@ -36,35 +36,41 @@
     matchMedia('(min-width: 900px)').addEventListener('change', (m) => m.matches && setMenu(false));
   }
 
-  /* Striscia album: frecce e stato disabilitato ai bordi */
-  d.querySelectorAll('[data-strip]').forEach((wrap) => {
-    const strip = wrap.querySelector('.strip');
-    const prev = wrap.querySelector('[data-strip-prev]');
-    const next = wrap.querySelector('[data-strip-next]');
-    if (!strip || !prev || !next) return;
-    const step = () => {
-      const card = strip.querySelector('.album-card');
-      return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(strip).columnGap || 16) : 300;
-    };
-    const go = (dir) => strip.scrollBy({ left: dir * step(), behavior: reduce ? 'auto' : 'smooth' });
-    prev.addEventListener('click', () => go(-1));
-    next.addEventListener('click', () => go(1));
-    const cards = strip.querySelectorAll('.album-card');
-    if ('IntersectionObserver' in window && cards.length) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            const full = e.intersectionRatio > 0.98;
-            if (e.target === cards[0]) prev.disabled = full;
-            if (e.target === cards[cards.length - 1]) next.disabled = full;
-          });
-        },
-        { root: strip, threshold: [0, 0.98, 1] }
-      );
-      io.observe(cards[0]);
-      io.observe(cards[cards.length - 1]);
-    }
-  });
+  /* Evidenzia nel menu la sezione che si sta leggendo (IntersectionObserver) */
+  const sections = [...d.querySelectorAll('[data-section]')];
+  const navLinks = [...d.querySelectorAll('.nav a[href*="#"]:not(.btn)')];
+  if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
+    const setCurrent = (id) =>
+      navLinks.forEach((a) => {
+        if (a.hash === `#${id}`) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) setCurrent(e.target.id);
+        }),
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    sections.forEach((s) => io.observe(s));
+    // fuori da tutte le sezioni (hero in cima, footer) nessuna voce attiva
+    const hero = d.querySelector('.hero');
+    if (hero) new IntersectionObserver(([e]) => e.isIntersecting && setCurrent('')).observe(hero);
+  }
+
+  /* Cambio lingua: resta sulla stessa sezione (gli id cambiano da una lingua all'altra) */
+  const lang = d.querySelector('.lang');
+  if (lang && sections.length) {
+    const MAP = { biografia: 'biography', biography: 'biografia', progetti: 'projects', projects: 'progetti', album: 'albums', albums: 'album', gallery: 'gallery', booking: 'booking' };
+    lang.addEventListener('click', () => {
+      const current = sections.find((s) => {
+        const r = s.getBoundingClientRect();
+        return r.top <= innerHeight * 0.45 && r.bottom >= innerHeight * 0.45;
+      });
+      const target = current && MAP[current.id];
+      if (target) lang.href = lang.getAttribute('href').split('#')[0] + '#' + target;
+    });
+  }
 
   /* Video YouTube: il player si carica solo al click (youtube-nocookie, nessun cookie prima) */
   d.addEventListener('click', (e) => {
