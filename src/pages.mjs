@@ -86,6 +86,19 @@ function bioSection(lang) {
 </section>`;
 }
 
+function reelSection(lang) {
+  const h = HOME[lang];
+  const v = photos.video;
+  return `<section class="reel" aria-label="${esc(h.reelTitle)}">
+  <div class="reel-frame">
+    <video muted loop playsinline preload="none" poster="/assets/img/video/concerto-poster.webp" width="${v.w}" height="${v.h}" aria-label="${esc(GALLERY_PAGE[lang].videoAlt)}">
+      <source src="/assets/img/video/concerto.mp4" type="video/mp4">
+    </video>
+    <p class="reel-title">${esc(h.reelTitle)}</p>
+  </div>
+</section>`;
+}
+
 function citiesSection(lang) {
   const h = HOME[lang];
   const cities = CITIES[lang].map((c) => `<li>${esc(c)}</li>`).join('');
@@ -183,17 +196,10 @@ function gallerySection(lang) {
       </a>
     </li>`;
   }).join('');
-  const v = photos.video;
   return `<section class="sec" id="${id}" data-section aria-labelledby="${id}-title">
   <div class="wrap">
     ${secHead(id, g.h1, '', g.lead)}
     <ul class="gallery">${items}</ul>
-    <h3 class="small-title gallery-video-title">${esc(g.videoTitle)}</h3>
-    <div class="gallery-video">
-      <video controls preload="none" playsinline poster="/assets/img/video/concerto-poster.webp" width="${v.w}" height="${v.h}" aria-label="${esc(g.videoAlt)}">
-        <source src="/assets/img/video/concerto.mp4" type="video/mp4">
-      </video>
-    </div>
   </div>
 </section>
 <dialog class="lightbox" data-lightbox-dialog aria-label="${esc(g.h1)}">
@@ -257,7 +263,7 @@ function bookingSection(lang) {
 function home(lang) {
   const h = HOME[lang];
   const hero = heroSection(lang);
-  const body = [hero.html, bioSection(lang), citiesSection(lang), projectsSection(lang), albumsSection(lang), gallerySection(lang), bookingSection(lang)].join('\n\n');
+  const body = [hero.html, bioSection(lang), reelSection(lang), citiesSection(lang), projectsSection(lang), albumsSection(lang), gallerySection(lang), bookingSection(lang)].join('\n\n');
   return {
     path: HOME_PATH[lang],
     altPath: HOME_PATH[other(lang)],

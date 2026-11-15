@@ -121,6 +121,7 @@ export const HOME = {
     lead: 'Chitarre classica, flamenca e battente per fondere la musica colta con il linguaggio popolare del Mediterraneo.',
     ctaAlbums: 'Ascolta gli album',
     ctaBooking: 'Booking',
+    reelTitle: 'Dal vivo',
     quote: 'Ennio Morricone ha composto per lui un concerto per chitarra e orchestra.',
     quoteNote:
       'Eseguito in prima assoluta a Parigi e inciso con l’Orchestra Nazionale dell’Accademia di Santa Cecilia di Roma.',
@@ -137,6 +138,7 @@ export const HOME = {
     lead: 'Classical, flamenco and battente guitars, blending art music with the popular language of the Mediterranean.',
     ctaAlbums: 'Listen to the albums',
     ctaBooking: 'Booking',
+    reelTitle: 'Live',
     quote: 'Ennio Morricone wrote a concerto for guitar and orchestra for him.',
     quoteNote:
       'Premiered in Paris and recorded with the Orchestra Nazionale dell’Accademia di Santa Cecilia in Rome.',
@@ -511,7 +513,6 @@ export const GALLERY_PAGE = {
     description: 'Foto di Giovanni Seneca in concerto e in posa con le sue chitarre: flamenca, battente e classica. Con il quartet, con Moni Ovadia e sul palco di Adriatico Mediterraneo.',
     h1: 'Gallery',
     lead: 'Concerti, ritratti e dettagli delle chitarre.',
-    videoTitle: 'Video',
     videoAlt: 'Giovanni Seneca in concerto con la chitarra battente',
   },
   en: {
@@ -519,7 +520,6 @@ export const GALLERY_PAGE = {
     description: 'Photos of Giovanni Seneca in concert and posing with his guitars: flamenco, battente and classical. With the quartet, with Moni Ovadia and on the Adriatico Mediterraneo stage.',
     h1: 'Gallery',
     lead: 'Concerts, portraits and details of the guitars.',
-    videoTitle: 'Video',
     videoAlt: 'Giovanni Seneca in concert with the battente guitar',
   },
 };
