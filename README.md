@@ -40,4 +40,6 @@ Netlify: build `node build.mjs`, cartella `dist` (vedi `netlify.toml`). Il file 
 
 ## Crediti
 
+Animazioni con GSAP 3.13 (ScrollTrigger, SplitText) in `src/static/js/vendor/`, configurate in fondo a `main.js` e disattivate con "riduci movimento". I colori delle sezioni (cobalto, calce, limone) sono temi CSS in fondo a `main.css`.
+
 Font Bodoni Moda e Hanken Grotesk (SIL OFL), icone Phosphor (MIT), self-hosted. Nessun tracciamento: i video YouTube si caricano solo al click, tramite `youtube-nocookie.com`.
