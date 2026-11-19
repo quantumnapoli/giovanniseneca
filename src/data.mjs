@@ -524,12 +524,14 @@ export const GALLERY_PAGE = {
 
 // Ordine = ordine in pagina. caption solo dove il vecchio sito dava un’indicazione precisa.
 export const GALLERY = [
+  { key: 'chiesa', alt: { it: 'Giovanni Seneca in concerto con la chitarra classica, camicia bianca', en: 'Giovanni Seneca in concert with the classical guitar, white shirt' } },
+  { key: 'anderlini', alt: { it: 'Giovanni Seneca con la chitarra battente in una luce calda', en: 'Giovanni Seneca with the battente guitar in warm light' } },
+  { key: 'moretti-profilo', alt: { it: 'Giovanni Seneca di profilo con la chitarra, in bianco e nero', en: 'Giovanni Seneca in profile with the guitar, in black and white' } },
+  { key: 'moretti-microfono', alt: { it: 'Giovanni Seneca al microfono con la chitarra, in bianco e nero', en: 'Giovanni Seneca at the microphone with the guitar, in black and white' } },
   { key: 'chitarrista', alt: { it: 'Giovanni Seneca con la chitarra flamenca', en: 'Giovanni Seneca with the flamenco guitar' } },
   { key: 'quintet', alt: { it: 'Il quintetto sul palco di Adriatico Mediterraneo', en: 'The quintet on the Adriatico Mediterraneo stage' }, caption: { it: 'Rotte Mediterranee Quintet', en: 'Rotte Mediterranee Quintet' } },
   { key: 'tre-chitarre', alt: { it: 'Giovanni Seneca seduto tra tre chitarre', en: 'Giovanni Seneca sitting among three guitars' } },
-  { key: 'ritratto', alt: { it: 'Giovanni Seneca accanto a una chitarra classica', en: 'Giovanni Seneca next to a classical guitar' } },
   { key: 'live-viola', alt: { it: 'Giovanni Seneca in concerto, con luci viola e turchesi', en: 'Giovanni Seneca in concert under purple and turquoise lights' } },
-  { key: 'battente', alt: { it: 'Giovanni Seneca con la chitarra battente', en: 'Giovanni Seneca with the battente guitar' } },
   { key: 'quartet', alt: { it: 'Il quartet sul palco del Festival dei Claustri', en: 'The quartet on stage at the Festival dei Claustri' }, caption: { it: 'Quartet al Festival dei Claustri 2017, Altamura', en: 'Quartet at the Festival dei Claustri 2017, Altamura' } },
   { key: 'live-giallo', alt: { it: 'Giovanni Seneca in concerto, con luci verdi e blu', en: 'Giovanni Seneca in concert under green and blue lights' } },
   { key: 'ovadia', alt: { it: 'Giovanni Seneca e Moni Ovadia sul palco', en: 'Giovanni Seneca and Moni Ovadia on stage' }, caption: { it: 'Con Moni Ovadia', en: 'With Moni Ovadia' } },

@@ -26,7 +26,6 @@ PHOTOS = {
     "chitarrista": "2018/07/giovanni-seneca-chitarrista.jpg",
     "battente": "2018/07/giovanni-seneca-intero.jpg",
     "tre-chitarre": "2018/07/giovanni-seneca-3-chitarre.jpg",
-    "ritratto": "2018/08/giovanni-seneca-biografia-una-chitarra.jpg",
     "approdo": "2018/07/Giovanni-Seneca-Approdo-latino.jpg",
     "live-giallo": "2018/07/IMG_5830.jpg",
     "live-viola": "2018/07/IMG_5831.jpg",
@@ -36,6 +35,11 @@ PHOTOS = {
     "quintet": "2018/07/Giovanni-seneca-rotte-mediterranee-quintet-1.jpg",
     "ovadia": "2018/07/ovadia-seneca.jpg",
     "ponte": "2018/08/giovanni-seneca-chitarra.jpg",
+    # foto più recenti, fornite da Giovanni (file in scripts/originals/)
+    "anderlini": "local:anderlini-luce-calda.jpg",
+    "moretti-profilo": "local:moretti-bn-profilo.jpg",
+    "chiesa": "local:chiesa-camicia-bianca.jpg",
+    "moretti-microfono": "local:moretti-bn-microfono.jpg",
 }
 COVERS = {
     "margini-abitabili": "2024/12/Screenshot-2024-12-05-alle-15.28.21.jpg",
@@ -52,6 +56,8 @@ COVER_SIZES = {"s": 480, "l": 960}
 
 
 def fetch(rel):
+    if rel.startswith("local:"):
+        return os.path.join(ROOT, "scripts", "originals", rel[6:])
     dest = os.path.join(CACHE, rel.replace("/", "_"))
     if not os.path.exists(dest):
         os.makedirs(CACHE, exist_ok=True)

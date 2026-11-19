@@ -75,7 +75,7 @@ function bioSection(lang) {
     </div>
     <div class="bio-grid">
       <figure class="bio-photo">
-        ${photo('ritratto', { sizes: '(min-width: 900px) 36vw, 100vw', alt: lang === 'it' ? 'Giovanni Seneca accanto a una chitarra classica' : 'Giovanni Seneca next to a classical guitar' })}
+        ${photo('chiesa', { sizes: '(min-width: 900px) 36vw, 100vw', alt: lang === 'it' ? 'Giovanni Seneca in concerto con la chitarra classica' : 'Giovanni Seneca in concert with the classical guitar' })}
       </figure>
       <div class="bio-text prose">
         <p class="lede">${esc(lede)}</p>
