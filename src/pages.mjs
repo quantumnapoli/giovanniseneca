@@ -192,9 +192,24 @@ function gallerySection(lang) {
   <div class="wrap">
     ${secHead(id, g.h1, '', g.lead)}
     <ul class="gallery">${items}</ul>
+  </div>
+</section>
+<dialog class="lightbox" data-lightbox-dialog aria-label="${esc(g.h1)}">
+  <button class="lb-btn lb-close" type="button" data-lb-close aria-label="${esc(ui.close)}">${icon('x')}</button>
+  <button class="lb-btn lb-prev" type="button" data-lb-prev aria-label="${esc(ui.prev)}">${icon('arrow-left')}</button>
+  <figure class="lb-fig"><img class="lb-img" alt=""><figcaption class="lb-cap"></figcaption></figure>
+  <button class="lb-btn lb-next" type="button" data-lb-next aria-label="${esc(ui.next)}">${icon('arrow-right')}</button>
+</dialog>`;
+}
+
+function newsSection(lang) {
+  const ui = UI[lang];
+  const id = SECTION.news[lang];
+  return `<section class="sec" id="${id}" data-section aria-labelledby="${id}-title">
+  <div class="wrap">
+    ${secHead(id, ui.fbTitle, '', ui.fbLead)}
     <div class="fb-block">
       <div class="fb-intro">
-        <h3 class="fb-title">${esc(ui.fbTitle)}</h3>
         <p>${esc(ui.fbText)}</p>
         <div class="fb-actions">
           <button class="btn btn-primary" type="button" data-fb="${esc(LINKS.facebook)}">${esc(ui.fbLoad)}</button>
@@ -204,13 +219,7 @@ function gallerySection(lang) {
       <div class="fb-frame" data-fb-frame></div>
     </div>
   </div>
-</section>
-<dialog class="lightbox" data-lightbox-dialog aria-label="${esc(g.h1)}">
-  <button class="lb-btn lb-close" type="button" data-lb-close aria-label="${esc(ui.close)}">${icon('x')}</button>
-  <button class="lb-btn lb-prev" type="button" data-lb-prev aria-label="${esc(ui.prev)}">${icon('arrow-left')}</button>
-  <figure class="lb-fig"><img class="lb-img" alt=""><figcaption class="lb-cap"></figcaption></figure>
-  <button class="lb-btn lb-next" type="button" data-lb-next aria-label="${esc(ui.next)}">${icon('arrow-right')}</button>
-</dialog>`;
+</section>`;
 }
 
 function bookingSection(lang) {
@@ -266,7 +275,7 @@ function bookingSection(lang) {
 function home(lang) {
   const h = HOME[lang];
   const hero = heroSection(lang);
-  const body = [hero.html, bioSection(lang), citiesSection(lang), projectsSection(lang), albumsSection(lang), gallerySection(lang), bookingSection(lang)].join('\n\n');
+  const body = [hero.html, bioSection(lang), citiesSection(lang), projectsSection(lang), albumsSection(lang), gallerySection(lang), newsSection(lang), bookingSection(lang)].join('\n\n');
   return {
     path: HOME_PATH[lang],
     altPath: HOME_PATH[other(lang)],

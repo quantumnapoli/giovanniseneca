@@ -61,7 +61,7 @@
   /* Cambio lingua: resta sulla stessa sezione (gli id cambiano da una lingua all'altra) */
   const lang = d.querySelector('.lang');
   if (lang && sections.length) {
-    const MAP = { biografia: 'biography', biography: 'biografia', progetti: 'projects', projects: 'progetti', album: 'albums', albums: 'album', gallery: 'gallery', booking: 'booking' };
+    const MAP = { biografia: 'biography', biography: 'biografia', progetti: 'projects', projects: 'progetti', album: 'albums', albums: 'album', gallery: 'gallery', news: 'news', booking: 'booking' };
     lang.addEventListener('click', () => {
       const current = sections.find((s) => {
         const r = s.getBoundingClientRect();

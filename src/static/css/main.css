@@ -591,7 +591,7 @@ p { text-wrap: pretty; }
 .motion-ok .album-hero { visibility: hidden; }
 
 /* Blocco Facebook */
-.fb-block { display: grid; grid-template-columns: 1fr minmax(280px, 500px); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; margin-top: clamp(3rem, 6vw, 5rem); padding-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--line); }
+.fb-block { display: grid; grid-template-columns: 1fr minmax(280px, 500px); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
 .fb-title { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; margin: 0 0 0.75rem; }
 .fb-intro p { max-width: 38ch; margin: 0 0 1.25rem; }
 .fb-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }

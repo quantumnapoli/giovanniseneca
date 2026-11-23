@@ -1,7 +1,7 @@
 import { SITE, LINKS, HOME_PATH, UI, sectionHref } from './data.mjs';
 import { esc, icon, socialLinks } from './lib.mjs';
 
-const NAV = ['bio', 'projects', 'albums', 'gallery']; // + booking (pulsante)
+const NAV = ['bio', 'projects', 'albums', 'gallery', 'news']; // + booking (pulsante)
 
 /**
  * Pagina completa.
