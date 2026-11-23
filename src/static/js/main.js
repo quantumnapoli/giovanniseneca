@@ -90,24 +90,15 @@
     f.focus();
   });
 
-  /* Post Facebook: il plugin ufficiale si carica solo al clic */
-  d.addEventListener('click', (e) => {
-    const b = e.target.closest('button[data-fb]');
-    if (!b) return;
-    const box = b.closest('.fb-block');
-    const frame = box.querySelector('[data-fb-frame]');
-    const w = Math.min(500, Math.max(280, Math.floor(frame.clientWidth || 500)));
-    const f = d.createElement('iframe');
-    f.src = 'https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent(b.dataset.fb) + '&tabs=timeline&width=' + w + '&height=640&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&lazy=true';
-    f.title = 'Facebook';
-    f.width = w; f.height = 640;
-    f.loading = 'lazy';
-    f.allow = 'encrypted-media';
-    f.referrerPolicy = 'strict-origin-when-cross-origin';
-    frame.replaceChildren(f);
-    box.classList.add('is-loaded');
-    b.remove();
-  });
+  /* Post Facebook: il blocco ufficiale parte poco prima di arrivarci, senza rallentare il caricamento */
+  const fb = d.querySelector('iframe[data-fb-src]');
+  if (fb) {
+    const go = () => { fb.src = fb.dataset.fbSrc; fb.removeAttribute('data-fb-src'); };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { io.disconnect(); go(); } }, { rootMargin: '800px 0px' });
+      io.observe(fb);
+    } else go();
+  }
 
   /* Copia email */
   d.querySelectorAll('[data-copy]').forEach((btn) => {

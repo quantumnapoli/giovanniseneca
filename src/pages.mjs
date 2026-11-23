@@ -212,11 +212,10 @@ function newsSection(lang) {
       <div class="fb-intro">
         <p>${esc(ui.fbText)}</p>
         <div class="fb-actions">
-          <button class="btn btn-primary" type="button" data-fb="${esc(LINKS.facebook)}">${esc(ui.fbLoad)}</button>
-          <a class="btn btn-ghost" href="${LINKS.facebook}" target="_blank" rel="noopener noreferrer">${esc(ui.fbOpen)}</a>
+          <a class="btn btn-primary" href="${LINKS.facebook}" target="_blank" rel="noopener noreferrer">${esc(ui.fbOpen)}</a>
         </div>
       </div>
-      <div class="fb-frame" data-fb-frame></div>
+      <div class="fb-frame"><iframe title="Facebook" data-fb-src="https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(LINKS.facebook)}&amp;tabs=timeline&amp;width=500&amp;height=640&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false" width="500" height="640" allow="encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     </div>
   </div>
 </section>`;
