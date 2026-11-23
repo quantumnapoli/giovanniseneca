@@ -75,6 +75,10 @@ export const UI = {
     watch: 'Video',
     photoOf: 'Foto',
     openPhoto: 'Apri la foto',
+    fbTitle: 'Ultimi post',
+    fbText: 'Concerti, uscite e novità dalla pagina Facebook di Giovanni. I post si caricano solo al clic, così Facebook non ti traccia prima.',
+    fbLoad: 'Carica i post',
+    fbOpen: 'Apri la pagina su Facebook',
   },
   en: {
     skip: 'Skip to content',
@@ -106,6 +110,10 @@ export const UI = {
     watch: 'Video',
     photoOf: 'Photo',
     openPhoto: 'Open photo',
+    fbTitle: 'Latest posts',
+    fbText: 'Concerts, releases and news from Giovanni’s Facebook page. Posts load only on click, so Facebook does not track you beforehand.',
+    fbLoad: 'Load the posts',
+    fbOpen: 'Open the page on Facebook',
   },
 };
 

@@ -71,7 +71,7 @@ function bioSection(lang) {
         <p class="statement-text">${esc(h.quote)}</p>
         <p class="statement-note">${esc(h.quoteNote)}</p>
       </div>
-      <figure class="statement-photo">${photo('tre-chitarre', { sizes: '(min-width: 900px) 34vw, 100vw', alt: lang === 'it' ? 'Giovanni Seneca seduto tra tre chitarre' : 'Giovanni Seneca sitting among three guitars' })}</figure>
+      <figure class="statement-photo">${photo('anderlini', { sizes: '(min-width: 900px) 34vw, 100vw', alt: lang === 'it' ? 'Giovanni Seneca con la chitarra battente in una luce calda' : 'Giovanni Seneca with the battente guitar in warm light' })}</figure>
     </div>
     <div class="bio-grid">
       <figure class="bio-photo">
@@ -192,6 +192,17 @@ function gallerySection(lang) {
   <div class="wrap">
     ${secHead(id, g.h1, '', g.lead)}
     <ul class="gallery">${items}</ul>
+    <div class="fb-block">
+      <div class="fb-intro">
+        <h3 class="fb-title">${esc(ui.fbTitle)}</h3>
+        <p>${esc(ui.fbText)}</p>
+        <div class="fb-actions">
+          <button class="btn btn-primary" type="button" data-fb="${esc(LINKS.facebook)}">${esc(ui.fbLoad)}</button>
+          <a class="btn btn-ghost" href="${LINKS.facebook}" target="_blank" rel="noopener noreferrer">${esc(ui.fbOpen)}</a>
+        </div>
+      </div>
+      <div class="fb-frame" data-fb-frame></div>
+    </div>
   </div>
 </section>
 <dialog class="lightbox" data-lightbox-dialog aria-label="${esc(g.h1)}">
